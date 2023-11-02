@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  min-height: 100vh;
+  background-color: rgb(43, 14, 67);
+  background-image: radial-gradient(
+      at 100% 79%,
+      rgb(88, 28, 135) 0,
+      transparent 90%
+    ),
+    radial-gradient(at 59% 77%, rgb(216, 180, 254) 0, transparent 24%),
+    radial-gradient(at 83% 95%, rgb(129, 140, 248) 0, transparent 94%),
+    radial-gradient(at 2% 51%, rgb(17, 24, 39) 0, transparent 44%),
+    radial-gradient(at 7% 87%, rgb(161, 98, 7) 0, transparent 50%),
+    radial-gradient(at 1% 51%, rgb(99, 102, 241) 0, transparent 35%);
+
+  color: #f9fafb;
+}
+
+@keyframes from-left-to-right {
+  0% {
+    translate: -100%;
+  }
+  100% {
+    translate: 100%;
+  }
+}
+
+.skeleton-animation {
+  animation: from-left-to-right 1.6s infinite;
+}
+
+.tooltip {
+  @apply invisible absolute;
+}
+
+.has-tooltip:hover .tooltip {
+  @apply visible z-50;
+}
+
+@keyframes pulseAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-bestPrice {
+  animation: pulseAnimation 1s ease-in-out;
+}
