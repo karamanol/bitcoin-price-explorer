@@ -9,8 +9,3 @@ This project is a web application that helps users find the best Bitcoin price a
 - **Vite**: Opinionated web dev build tool that serves your code with instant hot module replacement.
 - **Tailwind CSS**: Utility-first CSS framework for styling the UI.
 - **Framer Motion**: Animation library for React applications.
-
-## Installation
-
-1. Clone the repository.
-2. Install the dependencies using `npm install`.

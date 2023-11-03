@@ -55,18 +55,18 @@ function ListResultRow({
         target="_blank"
         rel="noopener noreferrer"
         href={logosAndAddresses[providerName].address}
-        className="flex gap-6 items-center h-100% p-3 hover:bg-violet-300/20 duration-300">
-        <div className="w-20 flex mr-2">
+        className="flex gap-2 sm:gap-6 items-center h-100% p-3 hover:bg-violet-300/20 duration-300">
+        <div className="w-14 sm:w-20 flex mr-2 ">
           <img
             src={logosAndAddresses[providerName].logo}
             alt={`${providerName} logo`}
           />
         </div>
-        <p className="text-2xl tracking-wider text-gray-100">
+        <p className="sm:text-2xl tracking-wider text-gray-100/80 max-[340px]:hidden">
           {providerName || "Provider"}
         </p>
-        <div className="ml-auto flex gap-2">
-          <span className="font-semibold text-xl text-gray-100/80">
+        <div className="ml-auto flex gap-2 items-center">
+          <span className="font-semibold sm:text-xl text-gray-100/80">
             {amountInBtc?.padEnd(10, "0") || "0.0000"}
           </span>
           <span className="text-xl text-gray-100/50 font-bold">BTC</span>

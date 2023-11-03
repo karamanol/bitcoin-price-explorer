@@ -22,8 +22,8 @@ function App() {
   }, [allProvidersPrice]);
 
   return (
-    <main className="max-w-2xl mx-auto px-5 py-10 min-h-screen">
-      <h1 className="font-mono bg-gradient-to-l from-rose-500 via-pink-600 to-blue-300 bg-clip-text text-transparent text-6xl uppercase text-center font-semibold tracking-wide">
+    <main className="max-w-2xl min-w-[260px] mx-auto px-5 py-10 min-h-screen flex flex-col">
+      <h1 className="font-mono bg-gradient-to-l from-rose-500 via-pink-600 to-blue-300 bg-clip-text text-transparent text-4xl sm:text-6xl uppercase text-center font-semibold tracking-wide">
         Find the Most Affordable Bitcoin Offers
       </h1>
 
@@ -74,12 +74,21 @@ function App() {
       </ul>
 
       {/* Tooltip */}
-      <div className="has-tooltip absolute right-8 top-8">
-        <span className="pl-4 tooltip rounded shadow-lg p-1 bg-slate-100/20 text-gray-900/60 mt-12 -ml-40 w-56 font-semibold">
-          Displayed Bitcoin amount may vary based on the chosen payment method
+      <div className="hidden sm:block has-tooltip absolute right-8 top-12">
+        <span className="pl-4 tooltip rounded shadow-lg p-1 bg-slate-100/60 backdrop-blur-sm text-gray-900/60 mt-12 -ml-60 w-72 font-semibold text-xl">
+          The final Bitcoin amount you get may vary based on the chosen payment
+          method
         </span>
         <div className="h-10 w-10 ">
           <img src="/info-circle-svgrepo-com.svg" alt="info icon" />
+        </div>
+      </div>
+      <div className="mt-auto">
+        <div className="sm:hidden border border-white/10 rounded-md mt-5 backdrop-blur-3xl">
+          <p className=" text-gray-200/50 p-2 text-center">
+            <span className="text-gray-100/70">IMPORTANT</span>: The final
+            Bitcoin amount you get may vary based on the chosen payment method
+          </p>
         </div>
       </div>
     </main>
