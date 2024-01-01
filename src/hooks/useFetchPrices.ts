@@ -13,7 +13,7 @@ const delay = (ms = 1000) => new Promise((r) => setTimeout(r, ms));
 export function useFetchPrices({ amount, currency }: DataForFetcher) {
   const [isLoading, setIsLoading] = useState(false);
   const [allProvidersPrice, setAllProvidersPrice] = useState<{
-    [ket: string]: string;
+    [key: string]: string;
   } | null>(null);
   const [inputError, setInpuError] = useState("");
 
