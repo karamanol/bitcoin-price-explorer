@@ -1,12 +1,18 @@
 import React from "react";
 
-export type DataForFetcher = {
+export type DataForFetcherType = {
   amount: string;
   currency: "BTC";
   controller?: AbortController;
   setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
   setInpuError?: React.Dispatch<React.SetStateAction<string>>;
 };
+export type PriceProvidersType =
+  | "Banxa"
+  | "Moonpay"
+  | "Ramp"
+  | "Sardine"
+  | "Simplex";
 
 export async function getPriceFromBanxa({
   amount,
@@ -14,8 +20,8 @@ export async function getPriceFromBanxa({
   controller,
   setIsLoading,
   setInpuError,
-}: DataForFetcher): Promise<string | undefined> {
-  const banxaUrl = `https://bitpay.com/buy/quote/banxa?fiat=USD&amount=${amount}&crypto=${currency}`;
+}: DataForFetcherType): Promise<string | undefined> {
+  const banxaUrl = `https://bitpay.com/crypto-widget/api/buy/quote/banxa?fiatAmount=${amount}&cryptoCurrency=${currency}&fiatCurrency=USD`;
   try {
     const res = await fetch(banxaUrl, { signal: controller?.signal });
     if (!res.ok)
@@ -41,8 +47,8 @@ export async function getPriceFromMoonpay({
   controller,
   setIsLoading,
   setInpuError,
-}: DataForFetcher): Promise<string | undefined> {
-  const moonpayUrl = `https://bitpay.com/buy/quote/moonpay?fiat=USD&amount=${amount}&crypto=${currency}`;
+}: DataForFetcherType): Promise<string | undefined> {
+  const moonpayUrl = `https://bitpay.com/crypto-widget/api/buy/quote/moonpay?fiatAmount=${amount}&cryptoCurrency=${currency}&fiatCurrency=USD&transactionMethod=credit_debit_card`;
   try {
     const res = await fetch(moonpayUrl, { signal: controller?.signal });
     if (!res.ok)
@@ -66,9 +72,9 @@ export async function getPriceFromRamp({
   controller,
   setIsLoading,
   setInpuError,
-}: DataForFetcher): Promise<string | undefined> {
+}: DataForFetcherType): Promise<string | undefined> {
   const rampFormatCurrency = currency + "_" + currency;
-  const rampUrl = `https://bitpay.com/buy/quote/ramp?fiat=USD&amount=${amount}&crypto=${rampFormatCurrency}`;
+  const rampUrl = `https://bitpay.com/crypto-widget/api/buy/quote/ramp?fiatAmount=${amount}&cryptoCurrency=${rampFormatCurrency}&fiatCurrency=USD`;
   try {
     const res = await fetch(rampUrl, { signal: controller?.signal });
     if (!res.ok)
@@ -93,8 +99,8 @@ export async function getPriceFromSardine({
   controller,
   setIsLoading,
   setInpuError,
-}: DataForFetcher): Promise<string | undefined> {
-  const sardineUrl = `https://bitpay.com/buy/quote/sardine?fiat=USD&amount=${amount}&crypto=${currency}&chain=bitcoin`;
+}: DataForFetcherType): Promise<string | undefined> {
+  const sardineUrl = `https://bitpay.com/crypto-widget/api/buy/quote/sardine?fiatAmount=${amount}&cryptoCurrency=${currency}&fiatCurrency=USD&cryptoChain=bitcoin&transactionMethod=credit`;
   try {
     const res = await fetch(sardineUrl, { signal: controller?.signal });
     if (!res.ok)
@@ -120,8 +126,8 @@ export async function getPriceFromSimplex({
   controller,
   setIsLoading,
   setInpuError,
-}: DataForFetcher): Promise<string | undefined> {
-  const simplexUrl = `https://bitpay.com/buy/quote/simplex?fiat=USD&amount=${amount}&crypto=${currency}`;
+}: DataForFetcherType): Promise<string | undefined> {
+  const simplexUrl = `https://bitpay.com/crypto-widget/api/buy/quote/simplex?fiatAmount=${amount}&cryptoCurrency=${currency}&fiatCurrency=USD&userId=67ef04b8-1520-4669-95aa-576e7bc84cb2&transactionMethod=credit_card`;
   try {
     const res = await fetch(simplexUrl, { signal: controller?.signal });
     if (!res.ok)

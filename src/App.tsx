@@ -1,21 +1,33 @@
 import Input from "./components/Input";
 import React, { useEffect, useState } from "react";
 import ListResultRow from "./components/ListResultRow";
-import { useFetchPrices } from "./hooks/useFetchPrices";
+import { ProvidersPriceType, useFetchPrices } from "./hooks/useFetchPrices";
+import { useDebounce } from "./hooks/useDebounce";
+import { PriceProvidersType } from "./services/getPrices";
+
+const amountDefaultValue = "100";
+const providersPlaceholder: ProvidersPriceType = {
+  Banxa: { name: "Banxa", cryptoAmount: "" },
+  Moonpay: { name: "Moonpay", cryptoAmount: "" },
+  Ramp: { name: "Ramp", cryptoAmount: "" },
+  Sardine: { name: "Sardine", cryptoAmount: "" },
+  Simplex: { name: "Simplex", cryptoAmount: "" },
+};
 
 function App() {
-  const [amount, setAmount] = useState("100");
-  const [bestPriceProvider, setBestPriceProvider] = useState<string>();
+  const [amount, setAmount] = useState(amountDefaultValue);
+  const [bestPriceProvider, setBestPriceProvider] = useState<string>("");
 
+  const debouncedAmount = useDebounce(amount, 800);
   const { allProvidersPrice, isLoading, inputError } = useFetchPrices({
-    amount,
+    amount: debouncedAmount || amount,
     currency: "BTC",
   });
 
   useEffect(() => {
     if (allProvidersPrice) {
       const sortedPrices = Object.entries(allProvidersPrice).sort(
-        (a, b) => parseFloat(a[1]) - parseFloat(b[1])
+        (a, b) => parseFloat(a[1].cryptoAmount) - parseFloat(b[1].cryptoAmount)
       );
       setBestPriceProvider(sortedPrices[sortedPrices.length - 1][0]);
     }
@@ -36,41 +48,20 @@ function App() {
       />
 
       <ul className="mt-6">
-        <ListResultRow
-          bestPriceProvider={bestPriceProvider}
-          erorString={inputError}
-          loading={isLoading}
-          amountInBtc={allProvidersPrice?.Banxa}
-          providerName="Banxa"
-        />
-        <ListResultRow
-          bestPriceProvider={bestPriceProvider}
-          erorString={inputError}
-          loading={isLoading}
-          amountInBtc={allProvidersPrice?.Moonpay}
-          providerName="Moonpay"
-        />
-        <ListResultRow
-          bestPriceProvider={bestPriceProvider}
-          erorString={inputError}
-          loading={isLoading}
-          amountInBtc={allProvidersPrice?.Ramp}
-          providerName="Ramp"
-        />
-        <ListResultRow
-          bestPriceProvider={bestPriceProvider}
-          erorString={inputError}
-          loading={isLoading}
-          amountInBtc={allProvidersPrice?.Sardine}
-          providerName="Sardine"
-        />
-        <ListResultRow
-          bestPriceProvider={bestPriceProvider}
-          erorString={inputError}
-          loading={isLoading}
-          amountInBtc={allProvidersPrice?.Simplex}
-          providerName="Simplex"
-        />
+        {Object.entries(allProvidersPrice || providersPlaceholder).map(
+          (provider) => {
+            return (
+              <ListResultRow
+                key={provider[0]}
+                providerName={provider[0] as PriceProvidersType}
+                amountInBtc={provider[1].cryptoAmount}
+                isBestPriceProvider={provider[0] === bestPriceProvider}
+                erorString={inputError}
+                loading={isLoading}
+              />
+            );
+          }
+        )}
       </ul>
 
       {/* Tooltip */}
@@ -80,7 +71,7 @@ function App() {
           method
         </span>
         <div className="h-10 w-10 ">
-          <img src="/info-circle-svgrepo-com.svg" alt="info icon" />
+          <img src="/info-circle.svg" alt="info icon" />
         </div>
       </div>
       <div className="mt-auto">
