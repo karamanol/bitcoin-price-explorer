@@ -7,12 +7,8 @@ export type DataForFetcherType = {
   setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
   setInpuError?: React.Dispatch<React.SetStateAction<string>>;
 };
-export type PriceProvidersType =
-  | "Banxa"
-  | "Moonpay"
-  | "Ramp"
-  | "Sardine"
-  | "Simplex";
+export type PriceProvidersType = "Banxa" | "Moonpay" | "Ramp" | "Sardine";
+// | "Simplex";
 
 export async function getPriceFromBanxa({
   amount,

@@ -6,7 +6,7 @@ import {
   getPriceFromMoonpay,
   getPriceFromRamp,
   getPriceFromSardine,
-  getPriceFromSimplex,
+  // getPriceFromSimplex,
 } from "../services/getPrices";
 
 export type ProvidersPriceType = Record<
@@ -48,7 +48,13 @@ export function useFetchPrices({ amount, currency }: DataForFetcherType) {
       async function fetchAllPrices() {
         try {
           setIsLoading(true);
-          const [banxa, moonpay, ramp, sardine, simplex] = await Promise.all([
+          const [
+            banxa,
+            moonpay,
+            ramp,
+            sardine,
+            //  simplex
+          ] = await Promise.all([
             getPriceFromBanxa({
               amount,
               currency,
@@ -77,13 +83,13 @@ export function useFetchPrices({ amount, currency }: DataForFetcherType) {
               setIsLoading,
               setInpuError,
             }),
-            getPriceFromSimplex({
-              amount,
-              currency,
-              controller,
-              setIsLoading,
-              setInpuError,
-            }),
+            // getPriceFromSimplex({
+            //   amount,
+            //   currency,
+            //   controller,
+            //   setIsLoading,
+            //   setInpuError,
+            // }),
           ]);
 
           const providersPrice: ProvidersPriceType = {
@@ -91,7 +97,7 @@ export function useFetchPrices({ amount, currency }: DataForFetcherType) {
             Moonpay: { name: "Moonpay", cryptoAmount: moonpay || "" },
             Ramp: { name: "Ramp", cryptoAmount: ramp || "" },
             Sardine: { name: "Sardine", cryptoAmount: sardine || "" },
-            Simplex: { name: "Simplex", cryptoAmount: simplex || "" },
+            // Simplex: { name: "Simplex", cryptoAmount: simplex || "" },
           };
 
           setAllProvidersPrice(providersPrice);

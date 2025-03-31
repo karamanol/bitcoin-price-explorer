@@ -11,7 +11,7 @@ const providersPlaceholder: ProvidersPriceType = {
   Moonpay: { name: "Moonpay", cryptoAmount: "" },
   Ramp: { name: "Ramp", cryptoAmount: "" },
   Sardine: { name: "Sardine", cryptoAmount: "" },
-  Simplex: { name: "Simplex", cryptoAmount: "" },
+  // Simplex: { name: "Simplex", cryptoAmount: "" },
 };
 
 function App() {

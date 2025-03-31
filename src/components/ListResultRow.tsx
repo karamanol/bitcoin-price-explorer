@@ -25,10 +25,10 @@ const logosAndAddresses: Record<
     logo: "/icons-btc-providers/logo-ramp.svg",
     address: "https://ramp.network/buy",
   },
-  Simplex: {
-    logo: "/icons-btc-providers/logo-simplex.svg",
-    address: "https://www.simplex.com/account/buy",
-  },
+  // Simplex: {
+  //   logo: "/icons-btc-providers/logo-simplex.svg",
+  //   address: "https://www.simplex.com/account/buy",
+  // },
   Sardine: {
     logo: "/icons-btc-providers/logo-sardine.svg",
     address: "https://crypto.sardine.ai/buy",
